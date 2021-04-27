@@ -4,6 +4,8 @@ import pandas as pd
 import seaborn as sns 
 import numpy  as np
 import math
+import dataframe_image as dfi
+
 
 ''' Pre-processing Step '''
 # 1. Loading Dataset 
@@ -11,6 +13,8 @@ import math
 data = pd.read_csv('DataSet\deliveryDataset.csv', sep = ',')
 print(data.head(5)) #View the first 5 rows 
 print(data.info()) #Display the features's types
+dfi.export(data.head(5),"Outputs/data.png")
+
 
 """type(Reached_YN) = Integer : Puisque notre probleme est de classification (binaire) donc il faut convertir la variable cible (Reached_On_Time)
 de Integer to Object """
@@ -22,14 +26,19 @@ data['Reached_YN'] = data['Reached_YN'].astype(np.object)
 
 all_NaN_values = data.isnull().sum().sort_values(ascending=False) #counts NaN values by each features
 percent_NaN = (data.isnull().sum()*100 / data.isnull().count()).sort_values(ascending=False) #Percentage of NaN value (for each features)
-NaN_df = pd.concat([all_NaN_values, percent_NaN], axis=1, keys=['Total', 'Percent']) # return the NaN dataframe
+NaN_df = pd.concat([all_NaN_values, percent_NaN], axis=1, keys=['Total NaN', 'Percent NaN']) # return the NaN dataframe
 
 """ Nous voyons qu'il n'y a pas de valeurs invalides, nous pouvons donc poursuivre l'exploration."""
-print(NaN_df) 
+print(NaN_df)
+dfi.export(NaN_df,"Outputs/NaNDf_percent.png")
+
+
 
 # 3. Describe the Features 
 print(data.describe(include=np.number)) #Continuous variables
 print(data.describe(include=np.object)) #Categorical variables
+dfi.export(data.describe(include=np.object),"Outputs/Catego_Vars_Desc.png")
+dfi.export(data.describe(include=np.number),"Outputs/Continu_Vars_Desc.png")
 
 """
 A partir de l'exploration initiale ci-dessus, nous voyons que :

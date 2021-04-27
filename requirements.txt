@@ -2,3 +2,4 @@ pandas
 numpy
 scikit-learn
 seaborn
+dataframe_image
