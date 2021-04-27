@@ -11,11 +11,12 @@ import math
 data = pd.read_csv('DataSet\deliveryDataset.csv', sep = ',')
 print(data.head(5)) #View the first 5 rows 
 print(data.info()) #Display the features's types
-"""Puisque notre probleme est de classification (binaire) donc il faut convertir la variable cible (Reached_On_Time)
+
+"""type(Reached_YN) = Integer : Puisque notre probleme est de classification (binaire) donc il faut convertir la variable cible (Reached_On_Time)
 de Integer to Object """
-data.rename(columns={'Reached.on.Time_Y.N':'Reached_YN'}, inplace=True)
 
-
+data.rename(columns={'Reached.on.Time_Y.N':'Reached_YN'}, inplace=True) # Rename the Label features
+data['Reached_YN'] = data['Reached_YN'].astype(np.object)
 
 # 2. Missing Values in Dataset: Check if there are a NaN value 
 
@@ -36,6 +37,7 @@ A partir de l'exploration initiale ci-dessus, nous voyons que :
 - Environ 68%. des modes d'expédition sont par bateau, les autres étant le vol et la route.
 - Environ 48%. de l'importance du produit est classée comme faible.
 - Le sexe des clients semble être réparti de manière égale avec environ 50,4%. de femmes.
+- Environ 60%. des colis ne sont pas livré en temps (On peut dire qu'on une Balanced dataset)
 """
 
 # 4. 
