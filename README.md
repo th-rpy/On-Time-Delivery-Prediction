@@ -1,2 +1,2 @@
-# On-Time-Delivery-Prediction
+# 📦 Shipment Arrival Prediction
 Session Project: Shipment Arrival Prediction¶ Given data about online shipments, let's try to predict whether a given shipment will arrive on time.  We will use a variety of classification models to make our predictions.
