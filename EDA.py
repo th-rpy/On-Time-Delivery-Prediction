@@ -21,6 +21,20 @@ NaN_df = pd.concat([all_NaN_values, percent_NaN], axis=1, keys=['Total', 'Percen
 """ N'a aucune donnée manquante dans notre base de données """
 print(NaN_df) 
 
-# 3. 
+# 3. Describe the Features 
+print(data.describe(include=np.number)) #Continuous variables
+print(data.describe(include=np.object)) #Categorical variables
+
+"""
+A partir de l'exploration initiale ci-dessus, nous voyons que :
+
+- Environ 68%. des modes d'expédition sont par bateau, les autres étant le vol et la route.
+- Environ 48%. de l'importance du produit est classée comme faible.
+- Le sexe des clients semble être réparti de manière égale avec environ 50,4%. de femmes.
+"""
+
+# 4. 
+
+
 
 
