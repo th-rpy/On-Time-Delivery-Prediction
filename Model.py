@@ -46,4 +46,7 @@ print('Classification Report of train_data \n',
 print('Classification Report of test_data \n',
       classification_report(test_label, test_pred))
 
+# Importance of the features
+
+
 # 2. Model 2 : RandomForest or Logistic regression
