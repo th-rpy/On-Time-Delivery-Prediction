@@ -45,4 +45,3 @@ print('Classification Report of train_data \n',
       classification_report(train_label, train_pred))
 print('Classification Report of test_data \n',
       classification_report(test_label, test_pred))
-
