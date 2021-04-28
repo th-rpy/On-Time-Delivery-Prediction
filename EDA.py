@@ -5,7 +5,7 @@ import seaborn as sns
 import numpy  as np
 import math
 import dataframe_image as dfi
-
+import matplotlib.pyplot as plt
 
 ''' Pre-processing Step '''
 # 1. Loading Dataset 
@@ -53,11 +53,9 @@ catg_var = list(data.select_dtypes(include=['object']).columns)
 cont_var = list(data.select_dtypes(exclude=['object']).columns)
 
 sns.set_theme(style="darkgrid")
-for var in catg_var:
-    ax = sns.countplot(x="Reached_YN", hue = var, data=data)
-    ax.figure.savefig("Outputs/CountPlot/cnt_plot_ReachedYN_{}.png".format(var))
-
-
+for i, var in enumerate(catg_var[:-1]):
+    plt.figure(i)
+    sns.countplot(data=data, x = var, hue="Reached_YN").figure.savefig("Outputs/CountPlot/cnt_plot_ReachedYN_{}.png".format(var))
 
 
 
