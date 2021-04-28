@@ -6,6 +6,7 @@ import numpy as np
 import math
 import dataframe_image as dfi
 import matplotlib.pyplot as plt
+from sklearn.neighbors import LocalOutlierFactor
 
 ''' Pre-processing Step '''
 # 1. Loading Dataset
@@ -37,6 +38,21 @@ NaN_df = pd.concat([all_NaN_values, percent_NaN], axis=1, keys=[
 """ Nous voyons qu'il n'y a pas de valeurs invalides, nous pouvons donc poursuivre l'exploration."""
 print(NaN_df)
 dfi.export(NaN_df, "Outputs/NaNDf_percent.png")
+
+# Drop the Outliers
+cont_var = list(data.select_dtypes(exclude=['object']).columns)
+clf = LocalOutlierFactor(n_neighbors=3)
+outliers = clf.fit_predict(data[cont_var])
+
+unique, counts = np.unique(outliers, return_counts=True)
+dict(zip(unique, counts))
+data['outliers']=outliers
+outliers_index=list(data[data['outliers']==-1].index)
+# Remove the outliers
+for o in outliers_index:
+      data.drop(index=o,inplace=True)
+
+data.drop('outliers', axis = 1, inplace = True)
 
 # 3. Describe the Features
 print(data.describe(include=np.number))  # Continuous variables
@@ -102,4 +118,3 @@ plt.figure(figsize=(16, 16), dpi=100)
 sns.heatmap(data.corr())
 ax_ = sns.heatmap(data_corr.corr(), annot=True, vmin=-1)
 ax_.figure.savefig('Outputs/CorrelationHeadmap.png')
-
