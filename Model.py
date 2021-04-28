@@ -47,6 +47,14 @@ print('Classification Report of test_data \n',
       classification_report(test_label, test_pred))
 
 # Importance of the features
+ ## Get importance from the model 
+importance = modelTreeTuned.coef_
+## Summarize feature importance
+for i,v in enumerate(importance):
+    	print('Feature: %0d, Score: %.5f' % (i,v))
 
+## plot feature importance
+plt.bar([x for x in range(len(importance))], importance)
+plt.show()
 
 # 2. Model 2 : RandomForest or Logistic regression
