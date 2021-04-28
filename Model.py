@@ -1,5 +1,4 @@
 # Import libraries and Data from EDA.py
-
 from EDA import data, data_corr, catg_var, cont_var
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
