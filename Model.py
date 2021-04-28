@@ -5,6 +5,8 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import GridSearchCV
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import LabelEncoder
+from sklearn import tree
+import matplotlib.pyplot as plt 
 import dataframe_image as dfi
 
 
@@ -34,7 +36,8 @@ modelTreeTuned = GridSearchCV(Tree, param_grid={'max_depth': range(
     4, 13), 'criterion': ['gini', 'entropy']})
 # Train the Decision Tree model (the best : the GridSearch's output)
 modelTreeTuned.fit(train_features, train_label)
-print(modelTreeTuned.best_params_)
+best_params = modelTreeTuned.best_params_
+print(best_params)
 
 # Predictions
 train_pred = modelTreeTuned.predict(train_features)
@@ -47,14 +50,25 @@ print('Classification Report of test_data \n',
       classification_report(test_label, test_pred))
 
 # Importance of the features
- ## Get importance from the model 
-importance = modelTreeTuned.coef_
-## Summarize feature importance
-for i,v in enumerate(importance):
-    	print('Feature: %0d, Score: %.5f' % (i,v))
+# Get importance from the model (model with {'criterion': 'entropy', 'max_depth': 5})
+modelTree = DecisionTreeClassifier(criterion=best_params['criterion'], max_depth = best_params['max_depth'])
+modelTree.fit(train_features, train_label)
+importance = modelTree.feature_importances_
+# Summarize feature importance
+for i, v in enumerate(importance):
+    print('Feature: %0d, Score: %.5f' % (i, v))
 
-## plot feature importance
+# plot feature importance
 plt.bar([x for x in range(len(importance))], importance)
-plt.show()
+plt.savefig('DecisionTree/Importance.png')
+
+# Save the tree in image format 
+fig = plt.figure(figsize=(50,50))
+_ = tree.plot_tree(modelTree, 
+                   feature_names=data.columns[:-1],  
+                   class_names=data.columns[-1],
+                   filled=True)
+
+fig.savefig("DecisionTree/decistion_tree.png")
 
 # 2. Model 2 : RandomForest or Logistic regression
