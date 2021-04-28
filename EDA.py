@@ -60,7 +60,7 @@ cont_var = list(data.select_dtypes(exclude=['object']).columns)
 sns.set_theme(style="darkgrid")
 
 # Pie chart : Warehouse Block
-plt.pie(data.Warehouse_block.value_counts(), explode=[.8, .3, .2, .1, .1], startangle=90, autopct='%.2f%%', labels=[
+"""plt.pie(data.Warehouse_block.value_counts(), explode=[.8, .3, .2, .1, .1], startangle=90, autopct='%.2f%%', labels=[
         'F', 'D', 'A', 'B', 'C'], radius=10, colors=['blue', 'pink', 'red', 'yellow', 'green'])
 plt.axis('equal')
 plt.title('Warehouse Block', fontdict={'fontsize': 22, 'fontweight': 'bold'})
@@ -70,16 +70,16 @@ plt.pie(data.Mode_of_Shipment.value_counts(), explode=[.8, .3, .2], startangle=9
         'Ship', 'Flight', 'Road'], radius=10, colors=['blue', 'red', 'green'])
 plt.axis('equal')
 plt.title('Mode of Shipment', fontdict={'fontsize': 22, 'fontweight': 'bold'})
-plt.savefig('Outputs/PieChart/Pie_Mode_of_Shipment.png')
+plt.savefig('Outputs/PieChart/Pie_Mode_of_Shipment.png')"""
 
-# Visualizations for the categories features
+"""# Visualizations for the categories features
 for i, var in enumerate(catg_var[:-1]):
     plt.figure(i)
     sns.countplot(data=data, x=var, hue="Reached_YN").figure.savefig(
-        "Outputs/CountPlot/cnt_plot_ReachedYN_{}.png".format(var)) 
+        "Outputs/CountPlot/cnt_plot_ReachedYN_{}.png".format(var)) """
 
 # Visualizations for the continuous features
-for i, var in enumerate(cont_var[]):
+for i, var in enumerate(cont_var):
     plt.figure(i)
     sns.scatterplot(data=data, x="total_bill", y="tip")
 
