@@ -5,6 +5,7 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import GridSearchCV
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import LabelEncoder
+import dataframe_image as dfi
 
 
 # Split the Cleaned Dataset (data)
@@ -44,3 +45,4 @@ print('Classification Report of train_data \n',
       classification_report(train_label, train_pred))
 print('Classification Report of test_data \n',
       classification_report(test_label, test_pred))
+dfi.export(classification_report(test_label, test_pred), "Outputs/cccc.png")
