@@ -40,7 +40,7 @@ print(modelTreeTuned.best_params_)
 train_pred = modelTreeTuned.predict(train_features)
 test_pred = modelTreeTuned.predict(test_features)
 
-# Matrix Confusion
+# Matrix Confusion for the Decision Tree Model
 print('Classification Report of train_data \n',
       classification_report(train_label, train_pred))
 print('Classification Report of test_data \n',
