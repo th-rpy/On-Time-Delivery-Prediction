@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.model_selection import GridSearchCV
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import LabelEncoder
 from sklearn import tree
 import matplotlib.pyplot as plt 
@@ -25,7 +26,7 @@ for col in catg_var[:-1]:
 
 # Split the dataset with test_size = 20% and 80% of dataset for train the model
 train_features, test_features, train_label, test_label = train_test_split(
-    data_, label_class, test_size=.2, random_state=42)
+    data_, label_class, test_size=.2, random_state=42, stratify = None )
 
 # 1. Decision Tree Model
 
@@ -51,7 +52,7 @@ print('Classification Report of test_data \n',
 
 # Importance of the features
 # Get importance from the model (model with {'criterion': 'entropy', 'max_depth': 5})
-modelTree = DecisionTreeClassifier(criterion=best_params['criterion'], max_depth = best_params['max_depth'])
+modelTree = DecisionTreeClassifier(criterion = best_params['criterion'], max_depth = best_params['max_depth'])
 modelTree.fit(train_features, train_label)
 importance = modelTree.feature_importances_
 # Summarize feature importance
@@ -67,8 +68,20 @@ fig = plt.figure(figsize=(50,50))
 _ = tree.plot_tree(modelTree, 
                    feature_names=data.columns[:-1],  
                    class_names=data.columns[-1],
-                   filled=True)
+                   filled=True, max_depth = 2)
 
 fig.savefig("DecisionTree/decistion_tree.png")
 
-# 2. Model 2 : RandomForest or Logistic regression
+# 2. Model 2 : Logistic regression
+
+## Define the model
+modelRgLog = LogisticRegression(solver='liblinear', random_state=0)
+
+## Fitting the model with the train dataset
+modelRgLog.fit(train_features, train_label)
+
+## Make Predictions model
+y_pred_rg = modelRgLog.predict(test_features)
+
+## Classification Report model
+classification_report(test_label , y_pred_rg)

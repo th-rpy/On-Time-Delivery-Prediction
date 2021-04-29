@@ -66,7 +66,7 @@ A partir de l'exploration initiale ci-dessus, nous voyons que :
 - Environ 68%. des modes d'expédition sont par bateau, les autres étant le vol et la route.
 - Environ 48%. de l'importance du produit est classée comme faible.
 - Le sexe des clients semble être réparti de manière égale avec environ 50,4%. de femmes.
-- Environ 60%. des colis ne sont pas livré en temps (On peut dire qu'on une Balanced dataset)
+- Environ 60%. des colis ne sont pas livré en temps (On peut dire qu'on a une Balanced dataset)
 """
 
 # 4. Data Visualizations
@@ -90,17 +90,20 @@ plt.axis('equal')
 plt.title('Mode of Shipment', fontdict={'fontsize': 22, 'fontweight': 'bold'})
 plt.savefig('Outputs/PieChart/Pie_Mode_of_Shipment.png')
 plt.show()
-# Visualizations for the categories features
-for i, var in enumerate(catg_var[:-1]):
-    plt.figure(i)
-    sns.countplot(data=data, x=var, hue="Reached_YN").figure.savefig(
-        "Outputs/CountPlot/cnt_plot_ReachedYN_{}.png".format(var))
 
 # Visualizations for the continuous features
 for i, var_ in enumerate(cont_var):
     plt.figure(i)
     sns.boxplot(data=data, y=var_, x="Reached_YN").figure.savefig(
         "Outputs/BoxPlot/cnt_plot_ReachedYN_{}.png".format(var_))
+
+# Visualizations for the categories features
+for i, var in enumerate(catg_var[:-1]):
+    plt.figure(i)
+    sns.countplot(data=data, x=var, hue="Reached_YN").figure.savefig(
+        "Outputs/CountPlot/cnt_plot_ReachedYN_{}.png".format(var))
+
+
 
 
 # Correlation between Reached_YN and all variables
