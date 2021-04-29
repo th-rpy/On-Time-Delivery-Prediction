@@ -84,4 +84,4 @@ modelRgLog.fit(train_features, train_label)
 y_pred_rg = modelRgLog.predict(test_features)
 
 ## Classification Report model
-classification_report(test_label , y_pred_rg)
+print(classification_report(test_label , y_pred_rg))
